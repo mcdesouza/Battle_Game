@@ -22,3 +22,6 @@ void Utils::Draw(SDL_Texture* tex, SDL_Rect src, SDL_Rect dest)
     SDL_RenderCopy(Game::renderer, tex, &src, &dest);
 }
 
+void Utils::InvertedTexture(SDL_Texture *texture, SDL_Rect src, SDL_Rect dest, SDL_RendererFlip flip) {
+    SDL_RenderCopyEx(Game::renderer, texture, &src, &dest, 0.0, NULL, flip);
+}

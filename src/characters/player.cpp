@@ -1,5 +1,55 @@
 #include "player.h"
 
+#include <chrono>
+
+Player::~Player() {
+    SDL_DestroyTexture(characterTexture);
+}
+
+void Player::Update() {
+    srcRect.w = 288;
+    srcRect.h = 128;
+    srcRect.x = 0;
+    srcRect.y = 0;
+    destRect.x = xpos;
+    destRect.y = ypos;
+    destRect.h = srcRect.h * 2;
+    destRect.w = srcRect.w * 2;
+
+    Uint32 currentTime = SDL_GetTicks();
+    if (currentTime > lastFrameTime + delay) {
+        if (count < frames) {
+            std::string filename = filepath + "/" + std::to_string(count) + ".png";
+            const char* file = filename.c_str();
+            characterTexture = Utils::LoadTexture(file);
+            count++;
+        }
+        else {
+            if (health > 0) {
+                this->Idle();
+                this->Update();
+            }
+            else {
+                this->Death();
+            }
+            if (isAttacking) {
+                isAttacking = false;
+            }
+        }
+        lastFrameTime = currentTime;
+    }
+}
+
+void Player::Render() {
+    if (isEnemy) {
+        Utils::InvertedTexture(characterTexture, srcRect, destRect, SDL_FLIP_HORIZONTAL);
+    }
+    else {
+        SDL_RenderCopy(Game::renderer, characterTexture, &srcRect,&destRect);
+    }
+}
+
+
 bool Player::Attack1(Character& enemy) {
     if (getMP() >= 15) {
         enemy.setHealth(enemy.getHealth() - (20 + (2 * level)));

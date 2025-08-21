@@ -30,6 +30,7 @@ public:
     void CheckLevelUP();
     void LevelUp();
 
+    virtual void Idle() = 0;
     virtual void TakeDamage() = 0;
     virtual void Death() = 0;
     // animation update, if not attacking then idle

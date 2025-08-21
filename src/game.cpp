@@ -3,7 +3,9 @@
 #include "utils/utils.h"
 #include "characters/character.h"
 #include "characters/player.h"
+#include "characters/mauler.h"
 
+Player* player = nullptr;
 Arena* arena;
 
 SDL_Renderer* Game::renderer = nullptr;

@@ -12,6 +12,7 @@ public:
     bool Attack2(Character&) override;
     bool Attack3(Character&) override;
     bool Attack4(Character&) override;
+    void Idle() override;
     void TakeDamage() override;
     void Death() override;
 };
