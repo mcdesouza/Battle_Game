@@ -18,6 +18,7 @@ public:
     bool Running() {return isRunning;}
     void Render();
     void Clean();
+    void Battle();
 
     static SDL_Renderer *renderer;
     static SDL_Event event;

@@ -5,7 +5,8 @@
 #include "characters/player.h"
 #include "characters/mauler.h"
 
-Player* player = nullptr;
+Player* player;
+Player* enemy;
 Arena* arena;
 
 SDL_Renderer* Game::renderer = nullptr;
@@ -31,17 +32,17 @@ void Game::Init(const char* title, int width, int height, bool fullscreen) {
         isRunning = true;
     }
     arena = new Arena("../assets/arena/arena.png",0,0);
-    // player = std::unique_ptr<Player>(new Mauler("matt",false));
+    player = new Mauler("matt");
+    enemy = new Mauler("enemy");
 }
 
 void Game::Update() {
+    player->Update();
     arena->Update();
-    // player->Update();
 }
 void Game::HandleEvents()
 {
     SDL_Event event;
-
     SDL_PollEvent(&event);
 
     switch (event.type)
@@ -56,7 +57,7 @@ void Game::HandleEvents()
 void Game::Render() {
     SDL_RenderClear(renderer);
     arena->Render();
-    // player->Render();
+    player->Render();
     SDL_RenderPresent(renderer);
 }
 

@@ -16,6 +16,10 @@ int main(int argc, char *argv[]) {
         game->Update();
         game->Render();
 
+        frameTime = SDL_GetTicks() - frameStart;
+        if (1000/60 > frameTime) {
+            SDL_Delay(1000/60 - frameTime);
+        }
     }
     game->Clean();
     return 0;
