@@ -31,11 +31,12 @@ void Game::Init(const char* title, int width, int height, bool fullscreen) {
         isRunning = true;
     }
     arena = new Arena("../assets/arena/arena.png",0,0);
-
+    // player = std::unique_ptr<Player>(new Mauler("matt",false));
 }
 
 void Game::Update() {
     arena->Update();
+    // player->Update();
 }
 void Game::HandleEvents()
 {
@@ -55,6 +56,7 @@ void Game::HandleEvents()
 void Game::Render() {
     SDL_RenderClear(renderer);
     arena->Render();
+    // player->Render();
     SDL_RenderPresent(renderer);
 }
 
