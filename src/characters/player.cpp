@@ -1,7 +1,5 @@
 #include "player.h"
 
-#include <chrono>
-
 Player::~Player() {
     SDL_DestroyTexture(characterTexture);
 }
@@ -45,7 +43,7 @@ void Player::Render() {
         Utils::InvertedTexture(characterTexture, srcRect, destRect, SDL_FLIP_HORIZONTAL);
     }
     else {
-        SDL_RenderCopy(Game::renderer, characterTexture, &srcRect,&destRect);
+        Utils::Draw(characterTexture, srcRect,destRect);
     }
 }
 

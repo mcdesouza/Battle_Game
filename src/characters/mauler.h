@@ -5,7 +5,7 @@
 
 class Mauler : public Player {
 public:
-    Mauler(std::string name) : Player(name, "Valkyrie") {};
+    Mauler(std::string name, bool isEnemy);
     ~Mauler() override {};
 
     bool Attack1(Character&) override;

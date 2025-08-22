@@ -9,7 +9,7 @@
 
 class Character {
 public:
-    Character(std::string name = "Unknown", int health = 100, int maxHealth = 100, int xp = 0, int level = 1, int mp = 100);
+    Character(std::string name = "Unknown", int health = 100, int maxHealth = 100, int xp = 0, int level = 1, int mp = 100){};
     virtual ~Character() {};
 
     int getHealth() {return health;}
