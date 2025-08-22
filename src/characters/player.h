@@ -11,7 +11,7 @@ public:
     void Update();
     void Render();
     void SetTexture(const char* filePath) {characterTexture = Utils::LoadTexture(filePath);}
-    void SetPath(std::string filePath) {this->filepath = filePath;}
+    void SetPath(std::string filePath) {filepath = filePath;}
     void SetFrames(int frames) {this->frames = frames;}
     void SetCount(int count) {this->count = count;}
 
@@ -24,11 +24,11 @@ public:
     virtual bool Attack4(Character&);
     void SaveGame();
 
-    void SetEnemy(bool isEnemy) {this->isEnemy = isEnemy;}
     bool IsAttacking() const {return isAttacking;}
     void SetAttacking(bool isAttacking) {this->isAttacking = isAttacking;}
     void SetXpos(int xpos){this->xpos = xpos;}
     void SetYpos(int ypos){this->ypos = ypos;}
+
 protected:
     std::string type;
 
@@ -37,7 +37,7 @@ protected:
     int xpos, ypos, frames, count, delay = 70;
     std::string filepath;
     Uint32 lastFrameTime = 0;
-    bool isEnemy = false, isAttacking = false;
+    bool isAttacking = false;
 };
 
 

@@ -1,23 +1,17 @@
 #include "mauler.h"
 
-Mauler::Mauler(std::string name, bool isEnemy) : Player(name, "Mauler") {
-    SetTexture("../assets/Crystal_Mauler/idle");
+Mauler::Mauler(std::string name) : Player(name, "Mauler") {
+    // SetTexture("../assets/Crystal_Mauler/idle");
     SetPath(std::string("../assets/Crystal_Mauler/idle"));
     SetFrames(8);
     SetCount(1);
-
-    if (isEnemy) {
-        SetEnemy(isEnemy);
-    }
-    else {
-        SetXpos(20);
-        SetYpos(20);
-    }
+    SetXpos(20);
+    SetYpos(200);
 };
 bool Mauler::Attack1(Character& enemy) {
     bool success = Player::Attack1(enemy);
     if (success) {
-        SetTexture("../assets/Crystal_Mauler/1_atk");
+        // SetTexture("../assets/Crystal_Mauler/1_atk");
         SetPath(std::string("assets/Crystal_Mauler/1_atk"));
         SetFrames(7);
         SetCount(1);
@@ -58,7 +52,7 @@ void Mauler::Death() {
     // render death animation
 }
 void Mauler::Idle() {
-    SetTexture("../assets/Crystal_Mauler/idle");
+    // SetTexture("../assets/Crystal_Mauler/idle");
     SetPath(std::string("../assets/Crystal_Mauler/idle"));
     SetFrames(8);
     SetCount(1);

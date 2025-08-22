@@ -1,4 +1,5 @@
 #include "player.h"
+#include <chrono>
 
 Player::~Player() {
     SDL_DestroyTexture(characterTexture);
@@ -11,8 +12,8 @@ void Player::Update() {
     srcRect.y = 0;
     destRect.x = xpos;
     destRect.y = ypos;
-    destRect.h = srcRect.h * 2;
-    destRect.w = srcRect.w * 2;
+    destRect.h = srcRect.h * 3;
+    destRect.w = srcRect.w * 3;
 
     Uint32 currentTime = SDL_GetTicks();
     if (currentTime > lastFrameTime + delay) {
@@ -23,9 +24,9 @@ void Player::Update() {
             count++;
         }
         else {
+            count = 1;
             if (health > 0) {
                 this->Idle();
-                this->Update();
             }
             else {
                 this->Death();
@@ -39,12 +40,7 @@ void Player::Update() {
 }
 
 void Player::Render() {
-    if (isEnemy) {
-        Utils::InvertedTexture(characterTexture, srcRect, destRect, SDL_FLIP_HORIZONTAL);
-    }
-    else {
-        Utils::Draw(characterTexture, srcRect,destRect);
-    }
+    Utils::Draw(characterTexture, srcRect,destRect);
 }
 
 
