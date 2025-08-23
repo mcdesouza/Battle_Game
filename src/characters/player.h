@@ -6,7 +6,13 @@
 
 class Player : public Character {
 public:
-    Player(std::string name,std::string type) : Character(name), type(type) {};
+    Player(std::string name,std::string type) : Character(name), type(type) {
+        health = 100;
+        maxHealth = 100;
+        xp = 0;
+        level = 1;
+        mp = 100;
+    };
     virtual ~Player();
     void Update();
     void Render();
@@ -34,7 +40,7 @@ protected:
 
     SDL_Texture* characterTexture;
     SDL_Rect srcRect, destRect;
-    int xpos, ypos, frames, count, delay = 70;
+    int xpos, ypos, frames, count = 1, delay = 70;
     std::string filepath;
     Uint32 lastFrameTime = 0;
     bool isAttacking = false;

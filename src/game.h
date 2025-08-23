@@ -18,13 +18,13 @@ public:
     bool Running() {return isRunning;}
     void Render();
     void Clean();
-    void Battle();
 
     static SDL_Renderer *renderer;
     static SDL_Event event;
 private:
     bool isRunning = false;
     int cnt = 0;
+    int battle = 0;
     SDL_Window *window;
 };
 

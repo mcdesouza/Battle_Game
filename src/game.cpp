@@ -34,6 +34,8 @@ void Game::Init(const char* title, int width, int height, bool fullscreen) {
     arena = new Arena("../assets/arena/arena.png",0,0);
     player = new Mauler("matt");
     enemy = new Mauler("enemy");
+    int x = player->getHealth();
+    int y = player->getMP();
 }
 
 void Game::Update() {
@@ -52,6 +54,15 @@ void Game::HandleEvents()
             break;
         default:
             break;
+    }
+    if (event.type == SDL_KEYDOWN) {
+        switch (event.key.keysym.sym) {
+            case SDLK_KP_1:
+                player->Attack1(*enemy);
+                break;
+            default:
+                break;
+        }
     }
 }
 void Game::Render() {

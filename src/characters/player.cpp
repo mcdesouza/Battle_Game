@@ -27,6 +27,7 @@ void Player::Update() {
             count = 1;
             if (health > 0) {
                 this->Idle();
+                this->Update();
             }
             else {
                 this->Death();

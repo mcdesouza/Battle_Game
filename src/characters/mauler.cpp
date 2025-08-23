@@ -5,17 +5,19 @@ Mauler::Mauler(std::string name) : Player(name, "Mauler") {
     SetPath(std::string("../assets/Crystal_Mauler/idle"));
     SetFrames(8);
     SetCount(1);
-    SetXpos(20);
+    SetXpos(60);
     SetYpos(200);
-};
+}
 bool Mauler::Attack1(Character& enemy) {
     bool success = Player::Attack1(enemy);
     if (success) {
         // SetTexture("../assets/Crystal_Mauler/1_atk");
-        SetPath(std::string("assets/Crystal_Mauler/1_atk"));
+        SetPath(std::string("../assets/Crystal_Mauler/1_atk"));
         SetFrames(7);
         SetCount(1);
         SetAttacking(true);
+        std::cout << "Attack Success" << std::endl;
+        // Player::Update();
     }
     return success;
 }
@@ -52,7 +54,6 @@ void Mauler::Death() {
     // render death animation
 }
 void Mauler::Idle() {
-    // SetTexture("../assets/Crystal_Mauler/idle");
     SetPath(std::string("../assets/Crystal_Mauler/idle"));
     SetFrames(8);
     SetCount(1);
