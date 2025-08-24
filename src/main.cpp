@@ -12,9 +12,9 @@ int main(int argc, char *argv[]) {
     while (game->Running()) {
         frameStart = SDL_GetTicks();
 
-        game->HandleEvents();
         game->Update();
         game->Render();
+        game->HandleEvents();
 
         frameTime = SDL_GetTicks() - frameStart;
         if (1000/60 > frameTime) {
