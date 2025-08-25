@@ -37,7 +37,12 @@ void Character::Update() {
 }
 
 void Character::Render() {
-    Utils::Draw(characterTexture, srcRect,destRect);
+    if (!isEnemy) {
+        Utils::Draw(characterTexture, srcRect,destRect);
+    }
+    else {
+        Utils::InvertedTexture(characterTexture, srcRect, destRect, SDL_FLIP_HORIZONTAL);
+    }
 }
 
 void Character::Heal() {

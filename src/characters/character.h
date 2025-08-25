@@ -10,7 +10,8 @@
 
 class Character {
 public:
-    Character(std::string name = "Unknown") {
+    Character(std::string name, bool enemy) {
+        isEnemy = enemy;
         health = 100;
         maxHealth = 100;
         xp = 0;
@@ -73,6 +74,7 @@ protected:
     std::string filepath;
     Uint32 lastFrameTime = 0;
     bool isAttacking = false;
+    bool isEnemy;
 };
 
 

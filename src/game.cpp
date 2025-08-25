@@ -31,13 +31,15 @@ void Game::Init(const char* title, int width, int height, bool fullscreen) {
         isRunning = true;
     }
     arena = new Arena("../assets/arena/arena.png",0,0);
-    player = new Mauler("matt");
-    enemy = new Mauler("enemy");
+    player = new Mauler("matt",false);
+    enemy = new Mauler("enemy",true);
 }
 
 void Game::Update() {
     player->Update();
+    // add a delay switch case depending on attack
     enemy->Update();
+    // add a delay switch case depending on attack
     arena->Update();
 }
 void Game::HandleEvents()
@@ -83,20 +85,58 @@ void Game::Clean() {
 }
 
 void Game::GameEvents() {
-// to do provide in game options save etc.
+    // to do: render the options to the screen
+    while (options) {
+        if (event.type == SDL_KEYDOWN) {
+            switch (event.key.keysym.sym) {
+                case SDLK_1: // enter battle;
+                    inBattle = true;
+                    options = false;
+                    break;
+                case SDLK_2: // save game
+                    player->SaveGame();
+                    options = false;
+                    break;
+                case SDLK_3: // exit to main menu saving
+                    options = false;
+                    intro = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }
 
 void Game::Intro() {
-// to do provide intro options
+// to do: render intro to the screen and make load game function
+    while (intro) {
+        if (event.type == SDL_KEYDOWN) {
+            switch (event.key.keysym.sym) {
+                case SDLK_1: // New Game
+                    characterSelect = true;
+                    intro = false;
+                    break;
+                case SDLK_2: // load game
+                    // player =
+                    // to do: add load game function
+                    intro = false;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }
 
 void Game::BattleEvents() {
+    bool success;
     if (inBattle) {
         if (playerTurn){ // Player Battle Options
             if (event.type == SDL_KEYDOWN) {
                 switch (event.key.keysym.sym) {
                     case SDLK_1:
-                        player->Attack1(*enemy);
+                        success = player->Attack1(*enemy);
                         break;
                     case SDLK_2:
                         player->Attack2(*enemy);
