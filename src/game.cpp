@@ -2,11 +2,10 @@
 #include "arena/arena.h"
 #include "utils/utils.h"
 #include "characters/character.h"
-#include "characters/player.h"
 #include "characters/mauler.h"
 
-Player* player;
-Player* enemy;
+Character* player;
+Character* enemy;
 Arena* arena;
 
 SDL_Renderer* Game::renderer = nullptr;

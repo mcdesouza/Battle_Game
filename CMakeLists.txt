@@ -25,8 +25,6 @@ add_executable(Battle_Game src/main.cpp
         src/utils/Utils.h
         src/characters/character.cpp
         src/characters/character.h
-        src/characters/player.cpp
-        src/characters/player.h
         src/characters/mauler.cpp
         src/characters/mauler.h)
 

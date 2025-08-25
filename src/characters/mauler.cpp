@@ -1,57 +1,66 @@
 #include "mauler.h"
 
-Mauler::Mauler(std::string name) : Player(name, "Mauler") {
-    // SetTexture("../assets/Crystal_Mauler/idle");
+Mauler::Mauler(std::string name) : Character(name) {
     SetPath(std::string("../assets/Crystal_Mauler/idle"));
     SetFrames(8);
     SetCount(1);
     SetXpos(60);
     SetYpos(200);
+    type = "Mauler";
 }
 bool Mauler::Attack1(Character& enemy) {
-    bool success = Player::Attack1(enemy);
+    bool success = Character::Attack1(enemy);
     if (success) {
-        // SetTexture("../assets/Crystal_Mauler/1_atk");
         SetPath(std::string("../assets/Crystal_Mauler/1_atk"));
         SetFrames(7);
         SetCount(1);
         SetAttacking(true);
-        std::cout << "Attack Success" << std::endl;
-        // Player::Update();
+        enemy.TakeDamage();
     }
     return success;
 }
 bool Mauler::Attack2(Character& enemy) {
-    bool success = Player::Attack1(enemy);
+    bool success = Character::Attack2(enemy);
     if (success) {
-        //render
-        //enemy.TakeDamage(); render this animation
+        SetPath(std::string("../assets/Crystal_Mauler/2_atk"));
+        SetFrames(7);
+        SetCount(1);
+        SetAttacking(true);
+        enemy.TakeDamage();
     }
     return success;
 }
 bool Mauler::Attack3(Character& enemy) {
-    bool success = Player::Attack1(enemy);
+    bool success = Character::Attack3(enemy);
     if (success) {
-        //render
-        //enemy.TakeDamage(); render this animation
+        SetPath(std::string("../assets/Crystal_Mauler/3_atk"));
+        SetFrames(17);
+        SetCount(1);
+        SetAttacking(true);
+        enemy.TakeDamage();
     }
     return success;
 }
 bool Mauler::Attack4(Character& enemy) {
-    bool success = Player::Attack1(enemy);
+    bool success = Character::Attack4(enemy);
     if (success) {
-        //render
-        //enemy.TakeDamage(); render this animation
-        //player.update mp
-        //enemy.update health bar
+        SetPath(std::string("../assets/Crystal_Mauler/sp_atk"));
+        SetFrames(15);
+        SetCount(1);
+        SetAttacking(true);
+        enemy.TakeDamage();
     }
     return success;
 }
 void Mauler::TakeDamage() {
-    // render take damage animation
+    SetPath(std::string("../assets/Crystal_Mauler/take_hit"));
+    SetFrames(6);
+    SetCount(1);
 }
 void Mauler::Death() {
-    // render death animation
+    SetPath(std::string("../assets/Crystal_Mauler/death"));
+    SetFrames(15);
+    SetCount(1);
 }
 void Mauler::Idle() {
     SetPath(std::string("../assets/Crystal_Mauler/idle"));

@@ -1,9 +1,9 @@
 #ifndef MAULER_H
 #define MAULER_H
 
-#include "player.h"
+#include "character.h"
 
-class Mauler : public Player {
+class Mauler : public Character {
 public:
     Mauler(std::string name);
     ~Mauler() override {};

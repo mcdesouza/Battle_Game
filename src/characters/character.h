@@ -4,12 +4,19 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 #include "utils/utils.h"
 #include "game.h"
 
 class Character {
 public:
-    Character(std::string name = "Unknown", int health = 100, int maxHealth = 100, int xp = 0, int level = 1, int mp = 100){};
+    Character(std::string name = "Unknown") {
+        health = 100;
+        maxHealth = 100;
+        xp = 0;
+        level = 1;
+        mp = 100;
+    };
     virtual ~Character() {};
 
     int getHealth() {return health;}
@@ -30,10 +37,26 @@ public:
     void CheckLevelUP();
     void LevelUp();
 
+    virtual bool Attack1(Character&);
+    virtual bool Attack2(Character&);
+    virtual bool Attack3(Character&);
+    virtual bool Attack4(Character&);
     virtual void Idle() = 0;
     virtual void TakeDamage() = 0;
     virtual void Death() = 0;
-    // animation update, if not attacking then idle
+
+    bool IsAttacking() const {return isAttacking;}
+    void SetAttacking(bool isAttacking) {this->isAttacking = isAttacking;}
+    void SetXpos(int xpos){this->xpos = xpos;}
+    void SetYpos(int ypos){this->ypos = ypos;}
+
+    void Update();
+    void Render();
+    void SaveGame();
+
+    void SetPath(std::string filePath) {filepath = filePath;}
+    void SetFrames(int frames) {this->frames = frames;}
+    void SetCount(int count) {this->count = count;}
 
 protected:
     int health;
@@ -42,6 +65,14 @@ protected:
     int level;
     int mp;
     std::string name;
+    std::string type;
+
+    SDL_Texture* characterTexture;
+    SDL_Rect srcRect, destRect;
+    int xpos, ypos, frames, count = 1, delay = 70;
+    std::string filepath;
+    Uint32 lastFrameTime = 0;
+    bool isAttacking = false;
 };
 
 
