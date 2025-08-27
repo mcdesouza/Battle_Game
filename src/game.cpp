@@ -31,12 +31,14 @@ void Game::Init(const char* title, int width, int height, bool fullscreen) {
         isRunning = true;
     }
     arena = new Arena("../assets/arena/arena.png",0,0);
-    player = new Mauler("matt",false);
+    // player = new Mauler("matt",false);
     enemy = new Mauler("enemy",true);
 }
 
 void Game::Update() {
-    player->Update();
+    if (player != nullptr) {
+        player->Update();
+    }
     // add a delay switch case depending on attack
     enemy->Update();
     // add a delay switch case depending on attack
@@ -54,27 +56,29 @@ void Game::HandleEvents()
         default:
             break;
     }
+    Intro();
+    PlayerSelect();
     BattleEvents();
     GameEvents();
 }
 void Game::Render() {
     SDL_RenderClear(renderer);
     arena->Render();
-    if (player) {
+    if (player != nullptr) {
         player->Render();
     }
     if (enemy) {
         enemy->Render();
     }
-    if (intro) {
-        // to do display intro box
-    }
-    if (characterSelect){
-        // to do display character selection box
-    }
-    if (options) {
-        // to do display attacks and in battle options
-    }
+    // if (intro) {
+    //     // to do display intro box
+    // }
+    // if (player == nullptr && !intro){
+    //     // to do display character selection box
+    // }
+    // if (options) {
+    //     // to do display attacks and in battle options
+    // }
     SDL_RenderPresent(renderer);
 }
 
@@ -110,11 +114,10 @@ void Game::GameEvents() {
 
 void Game::Intro() {
 // to do: render intro to the screen and make load game function
-    while (intro) {
+    if (intro) {
         if (event.type == SDL_KEYDOWN) {
             switch (event.key.keysym.sym) {
                 case SDLK_1: // New Game
-                    characterSelect = true;
                     intro = false;
                     break;
                 case SDLK_2: // load game
@@ -130,13 +133,12 @@ void Game::Intro() {
 }
 
 void Game::BattleEvents() {
-    bool success;
     if (inBattle) {
         if (playerTurn){ // Player Battle Options
             if (event.type == SDL_KEYDOWN) {
                 switch (event.key.keysym.sym) {
                     case SDLK_1:
-                        success = player->Attack1(*enemy);
+                        player->Attack1(*enemy);
                         break;
                     case SDLK_2:
                         player->Attack2(*enemy);
@@ -166,6 +168,9 @@ void Game::BattleEvents() {
             }
         }
         else { // Generate Random Enemy Battle Options
+            if (player->getHealth() <= 0) {
+                inBattle = false;
+            }
             playerTurn = true;
         }
     }
@@ -177,5 +182,27 @@ void Game::EnemySelect() {
 }
 void Game::PlayerSelect() {
 // to do options for player select
-// easy switch case
+    // to do: render player selection text box
+    if (player == nullptr && !intro) {
+        if (event.type == SDL_KEYDOWN) {
+            switch (event.key.keysym.sym) {
+                case SDLK_1:
+                    player = new Mauler("matt",false);
+                    inBattle = true;
+                    break;
+                case SDLK_2:
+                    break;
+                case SDLK_3:
+                    break;
+                case SDLK_4:
+                    break;
+                case SDLK_5:
+                    break;
+                case SDLK_6:
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }
