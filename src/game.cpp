@@ -215,6 +215,7 @@ void Game::EnemySelect() {
         switch (x) {
             default:
                 break;
+
         }
     }
 
