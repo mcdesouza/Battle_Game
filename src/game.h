@@ -32,9 +32,11 @@ private:
     int cnt = 0;
     int battle = 0;
     SDL_Window *window;
-    bool inBattle = false;
     bool intro = true;
+    bool choosePlayer = false;
+    bool loadPlayer = false;
     bool options = false;
+    bool inBattle = false;
     bool playerTurn = true;
 };
 

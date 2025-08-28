@@ -36,11 +36,9 @@ void Game::Init(const char* title, int width, int height, bool fullscreen) {
 }
 
 void Game::Update() {
-    if (player != nullptr) {
-        player->Update();
-    }
+    if (player != nullptr) { player->Update(); }
     // add a delay switch case depending on attack
-    enemy->Update();
+    if (enemy != nullptr) { enemy->Update(); }
     // add a delay switch case depending on attack
     arena->Update();
 }
@@ -64,12 +62,8 @@ void Game::HandleEvents()
 void Game::Render() {
     SDL_RenderClear(renderer);
     arena->Render();
-    if (player != nullptr) {
-        player->Render();
-    }
-    if (enemy) {
-        enemy->Render();
-    }
+    if (player != nullptr) { player->Render(); }
+    if (enemy != nullptr) { enemy->Render(); }
     // if (intro) {
     //     // to do display intro box
     // }
@@ -88,18 +82,74 @@ void Game::Clean() {
     SDL_Quit();
 }
 
+void Game::Intro() {
+// to do: render intro to the screen and make load game function
+    if (intro) {
+        if (event.type == SDL_KEYDOWN) {
+            switch (event.key.keysym.sym) {
+                case SDLK_1: // New Game
+                    choosePlayer = true;
+                    break;
+                case SDLK_2: // load game
+                    loadPlayer = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+        if (event.type == SDL_KEYUP && (choosePlayer || loadPlayer)) {
+            intro = false;
+        }
+    }
+}
+
+void Game::PlayerSelect() {
+    // to do: render player selection text box
+    // to do: add in all player paths for animations
+    if (choosePlayer) {
+        if (event.type == SDL_KEYDOWN) {
+            switch (event.key.keysym.sym) {
+                case SDLK_1:
+                    player = new Mauler("matt",false);
+                    choosePlayer = false;
+                    break;
+                case SDLK_2:
+                    choosePlayer = false;
+                    break;
+                case SDLK_3:
+                    choosePlayer = false;
+                    break;
+                case SDLK_4:
+                    choosePlayer = false;
+                    break;
+                case SDLK_5:
+                    choosePlayer = false;
+                    break;
+                case SDLK_6:
+                    choosePlayer = false;
+                    break;
+                default:
+                    break;
+            }
+            if (event.type = SDL_KEYUP && player != nullptr) {
+                options = true;
+            }
+        }
+    }
+}
+
 void Game::GameEvents() {
     // to do: render the options to the screen
-    while (options) {
+    if (options) {
         if (event.type == SDL_KEYDOWN) {
             switch (event.key.keysym.sym) {
                 case SDLK_1: // enter battle;
                     inBattle = true;
-                    options = false;
                     break;
                 case SDLK_2: // save game
                     player->SaveGame();
                     options = false;
+                    intro = true;
                     break;
                 case SDLK_3: // exit to main menu saving
                     options = false;
@@ -109,25 +159,8 @@ void Game::GameEvents() {
                     break;
             }
         }
-    }
-}
-
-void Game::Intro() {
-// to do: render intro to the screen and make load game function
-    if (intro) {
-        if (event.type == SDL_KEYDOWN) {
-            switch (event.key.keysym.sym) {
-                case SDLK_1: // New Game
-                    intro = false;
-                    break;
-                case SDLK_2: // load game
-                    // player =
-                    // to do: add load game function
-                    intro = false;
-                    break;
-                default:
-                    break;
-            }
+        if (event.type == SDL_KEYUP && (inBattle || intro)) {
+            options = false;
         }
     }
 }
@@ -177,32 +210,13 @@ void Game::BattleEvents() {
 }
 
 void Game::EnemySelect() {
-// to do generate a random enemy
-// easy switch case
-}
-void Game::PlayerSelect() {
-// to do options for player select
-    // to do: render player selection text box
-    if (player == nullptr && !intro) {
-        if (event.type == SDL_KEYDOWN) {
-            switch (event.key.keysym.sym) {
-                case SDLK_1:
-                    player = new Mauler("matt",false);
-                    inBattle = true;
-                    break;
-                case SDLK_2:
-                    break;
-                case SDLK_3:
-                    break;
-                case SDLK_4:
-                    break;
-                case SDLK_5:
-                    break;
-                case SDLK_6:
-                    break;
-                default:
-                    break;
-            }
+    if (enemy == nullptr) {
+        int x;
+        switch (x) {
+            default:
+                break;
         }
     }
+
 }
+
