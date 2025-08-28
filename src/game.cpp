@@ -106,7 +106,7 @@ void Game::Intro() {
 void Game::PlayerSelect() {
     // to do: render player selection text box
     // to do: add in all player paths for animations
-    if (choosePlayer) {
+    if (choosePlayer && !intro) {
         if (event.type == SDL_KEYDOWN) {
             switch (event.key.keysym.sym) {
                 case SDLK_1:
@@ -145,6 +145,7 @@ void Game::GameEvents() {
             switch (event.key.keysym.sym) {
                 case SDLK_1: // enter battle;
                     inBattle = true;
+                    //EnemySelect();
                     break;
                 case SDLK_2: // save game
                     player->SaveGame();
@@ -166,7 +167,8 @@ void Game::GameEvents() {
 }
 
 void Game::BattleEvents() {
-    if (inBattle) {
+    bool flag = false;
+    if (inBattle && !options) {
         if (playerTurn){ // Player Battle Options
             if (event.type == SDL_KEYDOWN) {
                 switch (event.key.keysym.sym) {
@@ -190,6 +192,7 @@ void Game::BattleEvents() {
                         break;
                     case SDLK_7:
                         inBattle = false;
+                        flag = true;
                         break;
                     default:
                         break;
@@ -207,17 +210,37 @@ void Game::BattleEvents() {
             playerTurn = true;
         }
     }
+    if (!inBattle && flag) {
+        options = true;
+    }
 }
 
 void Game::EnemySelect() {
     if (enemy == nullptr) {
-        int x;
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<> dist(1, 8);
+        // randomize enemy selection
+        int x = dist(gen);
         switch (x) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
             default:
                 break;
-
         }
     }
-
 }
-

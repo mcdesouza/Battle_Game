@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <iostream>
+#include <random>
 #include <SDL.h>
 #include <SDL_image.h>
 
