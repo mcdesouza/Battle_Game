@@ -1,5 +1,6 @@
 #include "game.h"
 #include "arena/arena.h"
+#include "game_options/options.h"
 #include "utils/utils.h"
 #include "characters/character.h"
 #include "characters/mauler.h"
@@ -7,6 +8,7 @@
 Character* player;
 Character* enemy;
 Arena* arena;
+Options* gameOptions;
 
 SDL_Renderer* Game::renderer = nullptr;
 SDL_Event Game::event;
@@ -33,6 +35,7 @@ void Game::Init(const char* title, int width, int height, bool fullscreen) {
     arena = new Arena("../assets/arena/arena.png",0,0);
     // player = new Mauler("matt",false);
     enemy = new Mauler("enemy",true);
+    gameOptions = new Options;
 }
 
 void Game::Update() {
@@ -41,6 +44,7 @@ void Game::Update() {
     if (enemy != nullptr) { enemy->Update(); }
     // add a delay switch case depending on attack
     arena->Update();
+    gameOptions->Update();
 }
 void Game::HandleEvents()
 {
@@ -64,9 +68,9 @@ void Game::Render() {
     arena->Render();
     if (player != nullptr) { player->Render(); }
     if (enemy != nullptr) { enemy->Render(); }
-    // if (intro) {
-    //     // to do display intro box
-    // }
+    if (intro) {
+        gameOptions->RenderIntro();
+    }
     // if (player == nullptr && !intro){
     //     // to do display character selection box
     // }

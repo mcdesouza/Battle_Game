@@ -26,6 +26,8 @@ add_executable(Battle_Game src/main.cpp
         src/characters/character.cpp
         src/characters/character.h
         src/characters/mauler.cpp
-        src/characters/mauler.h)
+        src/characters/mauler.h
+        src/game_options/options.cpp
+        src/game_options/options.h)
 
 target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES} )
