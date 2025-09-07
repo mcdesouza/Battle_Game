@@ -20,6 +20,8 @@ void Character::Update() {
             count++;
         }
         else {
+            if (!isEnemy) {SetXpos(60);}
+            else { SetXpos(360);}
             count = 1;
             if (health > 0) {
                 this->Idle();
