@@ -20,6 +20,7 @@ public:
     void Update();
 private:
     SDL_Texture* optionsTexture;
+
     SDL_Rect srcRect, destRect;
 
     int xpos, ypos;

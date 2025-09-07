@@ -33,7 +33,6 @@ void Game::Init(const char* title, int width, int height, bool fullscreen) {
         isRunning = true;
     }
     arena = new Arena("../assets/arena/arena.png",0,0);
-    // player = new Mauler("matt",false);
     enemy = new Mauler("enemy",true);
     gameOptions = new Options;
 }
@@ -71,12 +70,15 @@ void Game::Render() {
     if (intro) {
         gameOptions->RenderIntro();
     }
-    // if (player == nullptr && !intro){
-    //     // to do display character selection box
-    // }
-    // if (options) {
-    //     // to do display attacks and in battle options
-    // }
+    if (choosePlayer) {
+        gameOptions->RenderCharacterEvents();
+    }
+    if (options) {
+        gameOptions->RenderGameEvents();
+    }
+    if (inBattle) {
+        gameOptions->RenderBattleEvents();
+    }
     SDL_RenderPresent(renderer);
 }
 
@@ -133,6 +135,7 @@ void Game::PlayerSelect() {
                     choosePlayer = false;
                     break;
                 default:
+                    choosePlayer = true;
                     break;
             }
             if (event.type = SDL_KEYUP && player != nullptr) {

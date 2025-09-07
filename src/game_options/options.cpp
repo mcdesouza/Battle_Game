@@ -10,15 +10,27 @@ void Options::RenderIntro() {
 }
 
 void Options::RenderCharacterEvents() {
-
+    optionsTexture = Utils::LoadTexture("../assets/options/character_select.png");
+    Utils::Draw(optionsTexture, srcRect, destRect);
+    srcRect.w = 1323;
+    srcRect.h = 225;
+    xpos = -30;
 }
 
 void Options::RenderGameEvents() {
-
+    optionsTexture = Utils::LoadTexture("../assets/options/game_events.png");
+    Utils::Draw(optionsTexture, srcRect, destRect);
+    srcRect.w = 459;
+    srcRect.h = 270;
+    xpos = 400;
 }
 
 void Options::RenderBattleEvents() {
-
+    optionsTexture = Utils::LoadTexture("../assets/options/battle_events.png");
+    Utils::Draw(optionsTexture, srcRect, destRect);
+    srcRect.w = 1026;
+    srcRect.h = 225;
+    xpos = 135;
 }
 
 void Options::Update() {
