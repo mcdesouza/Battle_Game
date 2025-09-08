@@ -12,7 +12,7 @@ Mauler::Mauler(std::string name, bool enemy) : Character(name, enemy) {
 bool Mauler::Attack1(Character& enemy) {
     bool success = Character::Attack1(enemy);
     if (success) {
-        SetXpos(200);
+        // SetXpos(200);
         SetPath(std::string("../assets/Crystal_Mauler/1_atk"));
         SetFrames(7);
         SetCount(1);
@@ -24,6 +24,7 @@ bool Mauler::Attack1(Character& enemy) {
 bool Mauler::Attack2(Character& enemy) {
     bool success = Character::Attack2(enemy);
     if (success) {
+        // SetXpos(200);
         SetPath(std::string("../assets/Crystal_Mauler/2_atk"));
         SetFrames(7);
         SetCount(1);

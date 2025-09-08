@@ -110,7 +110,6 @@ void Game::Intro() {
 }
 
 void Game::PlayerSelect() {
-    // to do: render player selection text box
     // to do: add in all player paths for animations
     if (choosePlayer && !intro) {
         if (event.type == SDL_KEYDOWN) {
@@ -118,6 +117,7 @@ void Game::PlayerSelect() {
                 case SDLK_1:
                     player = new Mauler("matt",false);
                     choosePlayer = false;
+                    event.type = SDL_KEYUP;
                     break;
                 case SDLK_2:
                     choosePlayer = false;
@@ -138,7 +138,7 @@ void Game::PlayerSelect() {
                     choosePlayer = true;
                     break;
             }
-            if (event.type = SDL_KEYUP && player != nullptr) {
+            if (event.type == SDL_KEYUP && player != nullptr) {
                 options = true;
             }
         }
@@ -198,8 +198,8 @@ void Game::BattleEvents() {
                         player->Rest();
                         break;
                     case SDLK_7:
-                        inBattle = false;
                         flag = true;
+                        event.type = SDL_KEYUP;
                         break;
                     default:
                         break;
@@ -207,18 +207,21 @@ void Game::BattleEvents() {
                 playerTurn = false;
             }
             if (enemy->getHealth() <= 0) {
-                inBattle = false;
+                flag = true;
+                event.type = SDL_KEYUP;
             }
         }
         else { // Generate Random Enemy Battle Options
             if (player->getHealth() <= 0) {
-                inBattle = false;
+                flag = true;
+                event.type = SDL_KEYUP;
             }
             playerTurn = true;
         }
-    }
-    if (!inBattle && flag) {
-        options = true;
+        if (event.type == SDL_KEYUP && flag) {
+            inBattle = false;
+            options = true;
+        }
     }
 }
 
