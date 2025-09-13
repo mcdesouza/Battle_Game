@@ -18,7 +18,7 @@ public:
         level = 1;
         mp = 100;
     };
-    virtual ~Character() {};
+    virtual ~Character() { CleanTextures(); };
 
     int getHealth() {return health;}
     int getMaxHealth() {return maxHealth;}
@@ -53,6 +53,7 @@ public:
 
     void Update();
     void Render();
+    void CleanTextures();
     void SaveGame();
 
     void SetPath(std::string filePath) {filepath = filePath;}

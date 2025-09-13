@@ -16,7 +16,10 @@ void Character::Update() {
         if (count < frames) {
             std::string filename = filepath + "/" + std::to_string(count) + ".png";
             const char* file = filename.c_str();
+            // Set destroy texture before loading next
+            if (characterTexture) { SDL_DestroyTexture(characterTexture); characterTexture = nullptr;}
             characterTexture = Utils::LoadTexture(file);
+
             count++;
         }
         else {
@@ -45,6 +48,10 @@ void Character::Render() {
     else {
         Utils::InvertedTexture(characterTexture, srcRect, destRect, SDL_FLIP_HORIZONTAL);
     }
+}
+
+void Character::CleanTextures() {
+    if (characterTexture) { SDL_DestroyTexture(characterTexture); characterTexture = nullptr;}
 }
 
 void Character::Heal() {

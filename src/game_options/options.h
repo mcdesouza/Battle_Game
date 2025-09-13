@@ -10,7 +10,7 @@
 class Options {
 public:
     Options(){xpos = 0 ; ypos = 100;}
-    ~Options();
+    ~Options(){ SDL_DestroyTexture(optionsTexture); }
 
     void RenderIntro();
     void RenderCharacterEvents();

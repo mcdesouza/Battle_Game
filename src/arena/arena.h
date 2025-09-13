@@ -10,7 +10,7 @@
 class Arena {
 public:
     Arena(const char *arenaPath, int x, int y);
-    ~Arena();
+    ~Arena(){ SDL_DestroyTexture(arenaTexture); }
 
     void Render();
     void Update();

@@ -5,8 +5,9 @@
 #include "characters/character.h"
 #include "characters/mauler.h"
 
-Character* player;
-Character* enemy;
+// Character* player;
+std::unique_ptr<Character> player;
+std::unique_ptr<Character> enemy;
 Arena* arena;
 Options* gameOptions;
 
@@ -33,7 +34,7 @@ void Game::Init(const char* title, int width, int height, bool fullscreen) {
         isRunning = true;
     }
     arena = new Arena("../assets/arena/arena.png",0,0);
-    enemy = new Mauler("enemy",true);
+    enemy = std::make_unique<Mauler>("enemy",true);
     gameOptions = new Options;
 }
 
@@ -115,7 +116,7 @@ void Game::PlayerSelect() {
         if (event.type == SDL_KEYDOWN) {
             switch (event.key.keysym.sym) {
                 case SDLK_1:
-                    player = new Mauler("matt",false);
+                    player = std::make_unique<Mauler>("matt",false);
                     choosePlayer = false;
                     event.type = SDL_KEYUP;
                     break;
